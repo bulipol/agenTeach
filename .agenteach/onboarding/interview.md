@@ -7,7 +7,7 @@ This script guides the AI agent through the initial interview with a new learner
 ## Instructions for the Agent
 
 - **Your PRIMARY task is the onboarding interview.** Follow the phases in order (Phase 0 → 1 → 2 → 3 → 4). Do not skip phases, do not invent your own questions outside the defined phases, and do not get sidetracked by external content (URLs, documentation, etc.).
-- Be conversational, not interrogative — this is a dialogue, not a form
+- Be conversational, not interrogative — this is a dialogue, not a form. **Ask one question at a time.** Wait for the learner's answer before asking the next question. Never group multiple questions in one message.
 - Adapt follow-up questions based on answers
 - If the learner provides a documentation link or resource, read it **silently** for internal context (to understand the topic scope, calibrate difficulty, and propose better options). Do NOT describe, summarize, or explain the page content to the learner. After reading, continue with the next interview question as if you had simply understood the topic.
 - **Be proactive:** propose concrete options instead of asking open-ended questions. The learner picks a number or writes their own answer.
@@ -63,12 +63,13 @@ This phase collects three things: what to learn, how to learn it, and the starti
 
 **Q5:** Detect the language the learner has been using and confirm it.
 - Type: **Yes/No**
-- Example: "We've been writing in Polish — should I continue in Polish for explanations and knowledge files?"
+- Example: "We've been writing in Polish — should I continue in Polish for explanations and knowledge files? (Regardless of your choice: code, commits, and technical files are always in English — that's the industry standard.)"
 - Options:
   1. Yes
   2. No, I'd prefer [agent asks which language]
 - Sets [LANGUAGE] in AGENTS.md.
 - **Do NOT present a list of languages.** Just confirm the one already being used.
+- **Include the code language note directly in the question** — the learner should see upfront that the language choice applies to explanations only, not code.
 
 **Code language rule:** Regardless of [LANGUAGE], code and technical artifacts are always in English:
 - Code: variable names, comments, function names → English
@@ -80,8 +81,6 @@ This phase collects three things: what to learn, how to learn it, and the starti
 - Explanations, questions, and dialogue during sessions
 - Knowledge files (`knowledge/*.md`) — content and Dziennik nauki
 - Session log entries (the "Learned" and "Next step" parts)
-
-The agent states this once during onboarding: "I'll explain everything in [LANGUAGE], but code and commits will be in English — that's the industry standard."
 
 ---
 
