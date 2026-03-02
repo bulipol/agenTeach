@@ -6,131 +6,159 @@ This script guides the AI agent through the initial interview with a new learner
 
 ## Instructions for the Agent
 
-- Ask questions **one phase at a time** (not all at once)
 - Be conversational, not interrogative — this is a dialogue, not a form
 - Adapt follow-up questions based on answers
 - If the learner provides a documentation link or resource, read it to understand the topic scope
-- At the end: summarize all choices and ask for confirmation before generating files
-- **Question formatting:** Follow `.agenteach/question-formats.md` for how to present choices, confirmations, and transitions. Each question below is annotated with its type.
+- **Be proactive:** propose concrete options instead of asking open-ended questions. The learner picks a number or writes their own answer.
+- **Be efficient:** extract information from the learner's messages instead of re-asking. If the first message already contains the topic, don't ask Q1 again — confirm it.
+- **Question formatting:** Follow `.agenteach/question-formats.md` for how to present choices, confirmations, and transitions.
+- **Fast path:** If the learner says "defaults", "just set it up", or similar at any point — skip remaining questions, use sensible defaults, and jump to Phase 4 (Confirmation).
 
 ---
 
-## Phase 1 — Topic and Goals
+## Phase 0 — Welcome
+
+Before asking any questions, the agent introduces the process. Keep it short (3–5 sentences):
+
+1. **What this is:** "I'm your AI tutor. I'll guide you through learning [topic] step by step — with explanations, practice, and regular knowledge checks."
+2. **How it works:** "First, a few quick questions to set up your learning plan. Then we start right away."
+3. **How to answer:** "I'll give you numbered options — just type a number. You can always write your own answer if none fit."
+
+Adapt the wording to [TOPIC] and keep it natural. Do NOT read this template verbatim. If the learner's first message already contains the topic, incorporate it into the welcome.
+
+---
+
+## Phase 1 — Topic, Goal, and Level
+
+This phase collects three things: what to learn, how to learn it, and the starting level. Combine and skip questions when the learner's messages already provide the answers.
 
 **Q1:** "What do you want to learn?"
-- Free text. The agent categorizes into a domain.
+- If the learner's first message already states the topic (e.g., "I want to learn AI agents"), **do not re-ask**. Confirm it: "Got it — [TOPIC]." and move to Q2.
 - If the learner provides a link (e.g., documentation URL), the agent should read it to understand the scope.
 
-**Q2:** "What's your goal?"
+**Q2:** "How do you want to learn?"
 - Type: **Quick Choice**
 - Options:
-  1. Build something specific → MODE = `project-based`
-  2. Understand concepts / prepare for exam → MODE = `concept-based`
-- If ambiguous (e.g., "I want to learn React"), the agent asks: "Do you want to build a specific project with React, or learn React concepts systematically? Or both?"
+  1. Build a project — learn by building something concrete → MODE = `project-based`
+  2. Study concepts — systematic learning, possibly for an exam → MODE = `concept-based`
+- If ambiguous, the agent asks a clarifying follow-up.
 - The learner can also type their own answer — the agent determines MODE from their intent.
-
-**Determine MODE here.** All subsequent questions branch based on this choice.
-
----
-
-## Phase 2 — Skill Level
 
 **Q3:** "How much do you already know about [TOPIC]?"
 - Type: **Quick Choice**
 - Options:
-  1. Never touched it → beginner
-  2. Read about it / watched tutorials → beginner-plus
-  3. Built small things / did exercises → intermediate
-  4. Used it professionally / built real projects → advanced
+  1. Nothing — never touched it → beginner
+  2. A little — read/watched tutorials → beginner-plus
+  3. Some — built small things / did exercises → intermediate
+  4. A lot — used it professionally → advanced
 
-**Q4:** "Is there anything specific you already understand well? Anything you know you struggle with?"
-- This seeds the initial roadmap priorities and the first Dziennik nauki entries.
-- If the learner mentions weak areas, note them for early coverage.
+**Conditional Q4 (only if level >= intermediate):** "Anything specific you already know well or struggle with?"
+- Skip this for beginners — they don't know enough to answer usefully. The agent will discover gaps during sessions.
+- For intermediate+: this seeds Dziennik nauki priorities and roadmap calibration.
 
 ---
 
-## Phase 3 — Communication Preferences
+## Phase 2 — Language
 
-**Q5:** "What language should we communicate in? (for explanations, questions, knowledge files)"
-- Type: **Quick Choice**
+**Q5:** Detect the language the learner has been using and confirm it.
+- Type: **Yes/No**
+- Example: "We've been writing in Polish — should I continue in Polish for explanations and knowledge files?"
 - Options:
-  1. English
-  2. Polski
-  3. Other (agent asks which)
+  1. Yes
+  2. No, I'd prefer [agent asks which language]
 - Sets [LANGUAGE] in AGENTS.md.
+- **Do NOT present a list of languages.** Just confirm the one already being used.
 
-**Q6:** "Any preferences for how I teach?"
-- More examples / more theory / faster pace / slower pace
-- Stored in Decisions Made section.
-- If no preference: use default (balanced, follow Teaching Principles).
+**Code language rule:** Regardless of [LANGUAGE], code and technical artifacts are always in English:
+- Code: variable names, comments, function names → English
+- Commit messages → English
+- File names, directory names → English
+- README.md → English
+
+[LANGUAGE] applies to:
+- Explanations, questions, and dialogue during sessions
+- Knowledge files (`knowledge/*.md`) — content and Dziennik nauki
+- Session log entries (the "Learned" and "Next step" parts)
+
+The agent states this once during onboarding: "I'll explain everything in [LANGUAGE], but code and commits will be in English — that's the industry standard."
 
 ---
 
-## Phase 4 — Mode-Specific Questions
+## Phase 3 — Setup
+
+This phase configures the learning path. The agent is **proactive** — it proposes a concrete plan, the learner confirms or adjusts.
 
 ### If project-based:
 
-**Q7:** "What do you want to build?"
-- Concrete project description. If vague, help the learner refine it through dialogue.
-- If the learner has no idea: suggest a project based on the topic that covers key concepts progressively.
+**Q6:** The agent proposes a project AND tech stack together in one message:
 
-**Q8:** "What tech stack? (or should I suggest one?)"
-- Sets [TECH_STACK] in the mode extension.
-- If the learner is unsure, suggest based on the topic and their skill level.
+"Based on [TOPIC] and your level, here are some project ideas:"
+- Type: **Quick Choice** (agent-generated options)
+- The agent proposes 3–4 concrete projects tailored to [TOPIC] and [SKILL_LEVEL]. Each project should progressively cover key concepts.
+- Include the suggested tech stack in each option.
+- Example for "AI agents" + beginner:
+  1. CLI Agent (TypeScript + AI SDK) — terminal agent that reads files, searches the web, executes tasks
+  2. Chatbot with tools (TypeScript + AI SDK) — bot that checks weather, calculates, searches
+  3. Multi-agent pipeline (TypeScript + AI SDK) — multiple agents collaborating on a task
+- The learner picks a number or writes their own idea.
 
-**Q9:** "Any strong opinions on libraries, frameworks, or patterns?"
-- Example: "I want to build everything from scratch" or "Use established libraries for non-core stuff"
-- Sets [LIBRARY_DECISIONS] in Decisions Made.
-
-**Q10:** "Have you started already, or is this from scratch?"
-- If started: agent should read existing code to understand the current state.
-- If from scratch: agent will create the project structure.
+**Defaults applied automatically (no questions asked):**
+- Libraries: use established libraries for non-core stuff (focus on learning [TOPIC] itself)
+- Starting point: from scratch
+- If the learner has existing code or wants to build from scratch differently, they'll mention it. No need to ask.
 
 ### If concept-based:
 
-**Q7:** "Is this for a specific exam or certification? Which one?"
-- If yes: agent looks up the exam structure (domains, weights) to build a weighted roadmap.
-- If no: agent builds a dependency-ordered topic list.
+**Q6:** The agent proposes an exam/structure AND timeline together:
 
-**Q8:** "Do you have a deadline? (exam date, course end date)"
+"Here are common paths for learning [TOPIC]:"
+- Type: **Quick Choice** (agent-generated options)
+- The agent proposes likely certifications/exams for [TOPIC], plus a general option. Include timeline assumptions.
+- Example for "AWS":
+  1. AWS Solutions Architect Associate (SAA-C03) — at your own pace
+  2. AWS Developer Associate (DVA-C02) — at your own pace
+  3. General AWS knowledge — no specific exam, just understanding
+- The learner picks a number or writes their own path.
+
+**If the learner picks a specific exam, follow up:**
+
+**Q7:** "Do you have a deadline for this?"
+- Type: **Quick Choice**
+- Options:
+  1. No — learning at my own pace
+  2. Yes (agent asks for the date)
 - Sets [TIMELINE] in AGENTS.md.
-- If yes: agent will manage timeline and flag at-risk topics.
+- Skip this question for "general knowledge" path — default to no deadline.
 
-**Q9:** "Do you have study materials already? (books, courses, documentation links)"
-- If yes: agent can reference them for content and structure.
-- If no: agent proposes a topic structure based on the domain.
-
-**Q10:** "Any specific topics or domains you know are your weak spots?"
-- Prioritizes these in the roadmap.
-- Seeds initial Dziennik nauki awareness.
+**Defaults applied automatically (no questions asked):**
+- Study materials: agent proposes a topic structure. If the learner has materials, they'll mention them.
+- Teaching preferences: balanced approach (follow Teaching Principles). Learner can request changes anytime.
 
 ---
 
-## Phase 5 — Confirmation
+## Phase 4 — Confirmation
 
 The agent presents a structured summary:
 
 ```
-Here's what I understood:
+Here's the plan:
 
 **Topic:** [TOPIC]
-**Goal:** [GOAL]
 **Mode:** [MODE]
 **Skill level:** [SKILL_LEVEL]
 **Language:** [LANGUAGE]
 **Timeline:** [TIMELINE]
 
-**Key decisions:**
-- [decision 1]
-- [decision 2]
-- ...
+**Project/Path:** [chosen project or study path]
+**Tech stack:** [TECH_STACK] (project-based only)
 
 **Proposed roadmap (high level):**
 [For project-based: Track A stages + Track B topics]
 [For concept-based: Topic list with weights/priorities]
 
-**Project structure:**
-[Directory tree showing what will be created]
+**Defaults I'm using:**
+- [list any defaults: libraries, from scratch, balanced teaching, etc.]
+- You can change any of these anytime — just tell me.
 ```
 
 - Type: **Yes/No**

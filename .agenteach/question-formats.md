@@ -101,16 +101,16 @@ The arrow (`→`) and inline format signal this is a quick transition, not a con
 
 ## Interview Question Mapping
 
-| Question | Type | Options |
-|----------|------|---------|
-| Q1: What to learn? | Open-Ended | — |
-| Q2: What's your goal? | Quick Choice | 1. Build a project / 2. Learn concepts |
-| Q3: How much do you know? | Quick Choice | 1. Never touched / 2. Tutorials / 3. Small projects / 4. Professional |
-| Q4: Strengths/weaknesses? | Open-Ended | — |
-| Q5: What language? | Quick Choice | 1. English / 2. Polski / 3. Other |
-| Q6: Teaching preferences? | Open-Ended | — |
-| Q7–Q10: Mode-specific | Open-Ended | — |
-| Phase 5: Confirmation | Yes/No | 1. Looks good / 2. I want to change something |
+| Question | Type | Notes |
+|----------|------|-------|
+| Q1: What to learn? | Auto-detect or Open-Ended | Extract from first message if possible, confirm |
+| Q2: How to learn? | Quick Choice | 1. Build a project / 2. Study concepts |
+| Q3: Skill level? | Quick Choice | 1. Nothing / 2. A little / 3. Some / 4. A lot |
+| Q4: Strengths/weaknesses? | Open-Ended | Only if level >= intermediate, skip for beginners |
+| Q5: Language? | Yes/No (auto-detect) | Confirm detected language, don't present a list |
+| Q6: Project/path + stack | Quick Choice (agent-generated) | Agent proposes 3–4 options with tech stack included |
+| Q7: Deadline? (concept only) | Quick Choice | Only if exam selected. 1. No / 2. Yes |
+| Confirmation | Yes/No | Summary + defaults listed |
 
 ## Session Moment Mapping
 
