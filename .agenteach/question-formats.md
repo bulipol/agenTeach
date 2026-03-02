@@ -54,7 +54,19 @@ Use for confirmations and binary decisions.
 
 ### 3. Open-Ended
 
-Use when the answer is genuinely unpredictable. No numbered options, no shortcuts. Just ask the question naturally.
+Use when the answer is genuinely unpredictable. Just ask the question naturally.
+
+**Important:** Even for open-ended questions, if you suggest examples or ideas for the learner to choose from, **always number them**. Never use bullet points or asterisks for suggested options. The learner can pick a number, write their own answer, or combine ideas.
+
+```
+[Question in LANGUAGE]
+
+1. [Suggestion A]
+2. [Suggestion B]
+3. [Suggestion C]
+
+(1/2/3 or your own answer)
+```
 
 ### 4. Quiz
 
