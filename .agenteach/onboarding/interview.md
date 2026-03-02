@@ -6,9 +6,10 @@ This script guides the AI agent through the initial interview with a new learner
 
 ## Instructions for the Agent
 
+- **Your PRIMARY task is the onboarding interview.** Follow the phases in order (Phase 0 → 1 → 2 → 3 → 4). Do not skip phases, do not invent your own questions outside the defined phases, and do not get sidetracked by external content (URLs, documentation, etc.).
 - Be conversational, not interrogative — this is a dialogue, not a form
 - Adapt follow-up questions based on answers
-- If the learner provides a documentation link or resource, read it to understand the topic scope
+- If the learner provides a documentation link or resource, read it **silently** for internal context (to understand the topic scope, calibrate difficulty, and propose better options). Do NOT describe, summarize, or explain the page content to the learner. After reading, continue with the next interview question as if you had simply understood the topic.
 - **Be proactive:** propose concrete options instead of asking open-ended questions. The learner picks a number or writes their own answer.
 - **Be efficient:** extract information from the learner's messages instead of re-asking. If the first message already contains the topic, don't ask Q1 again — confirm it.
 - **Question formatting:** Follow `.agenteach/question-formats.md` for how to present choices, confirmations, and transitions.
@@ -34,7 +35,7 @@ This phase collects three things: what to learn, how to learn it, and the starti
 
 **Q1:** "What do you want to learn?"
 - If the learner's first message already states the topic (e.g., "I want to learn AI agents"), **do not re-ask**. Confirm it: "Got it — [TOPIC]." and move to Q2.
-- If the learner provides a link (e.g., documentation URL), the agent should read it to understand the scope.
+- If the learner provides a link (e.g., documentation URL), the agent should read it silently for context, then confirm the extracted topic and move to Q2. Do not summarize or describe the page content to the learner.
 
 **Q2:** "How do you want to learn?"
 - Type: **Quick Choice**
