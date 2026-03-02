@@ -73,7 +73,18 @@ When the core protocol reaches Step 4 (Practice/Implement), concept-based mode d
 
 Choose the activity that best fits the topic:
 
-1. **Quiz questions** — Multiple choice or short answer. Write the question, wait for the learner's answer, then reveal the correct answer with explanation.
+1. **Quiz questions** — Multiple choice or short answer. Present quiz questions using numbered options:
+
+   ```
+   **Q:** [Question in LANGUAGE]
+
+   1. [Option A]
+   2. [Option B]
+   3. [Option C]
+   4. [Option D]
+   ```
+
+   The learner responds with a number or natural language. Wait for the learner's answer, then reveal the correct answer with explanation.
 
 2. **Scenario analysis** — Present a real-world scenario (e.g., "A company needs to serve static assets globally with low latency. What AWS service would you recommend and why?"). Wait for the learner's reasoning before providing feedback.
 

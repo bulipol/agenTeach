@@ -5,6 +5,8 @@ This file is the master instruction set for any AI agent teaching in an agenTeac
 
 **Architecture:** This file is a template. During onboarding, the agent fills in the `[PLACEHOLDERS]` with the learner's choices and generates a project-specific AGENTS.md for the learner's project directory.
 
+**Question formatting:** Follow `.agenteach/question-formats.md` for how to present choices, confirmations, and transitions throughout all interactions.
+
 ---
 
 ## Learner Profile
@@ -90,7 +92,11 @@ Read at session start:
 
 Before any new content, ask 2–3 short, concrete questions in [LANGUAGE] about the last topic covered.
 
-**One question at a time.** Ask one question, wait for the answer, give feedback. After feedback, do NOT automatically ask the next question. Instead, give the learner space to react — they may want to discuss the feedback, ask a follow-up, or challenge the correction. End your feedback with a brief prompt like "Ready for the next question?" or "Want to dig into this, or move on?". Only proceed when the learner signals they are ready.
+**One question at a time.** Ask one question, wait for the answer, give feedback. After feedback, do NOT automatically ask the next question. Instead, give the learner space to react — they may want to discuss the feedback, ask a follow-up, or challenge the correction. End your feedback with a flow control prompt:
+
+`→ 1. Next question | 2. Let's dig deeper`
+
+Only proceed when the learner signals they are ready (number or natural language).
 
 **Use past learning data:** Before asking questions, check the `## Dziennik nauki` (Learning Journal) section of the relevant `knowledge/*.md` file. If the learner previously struggled with a concept or had a misconception, prioritize re-checking that area. Do not repeat the same question verbatim — rephrase or come from a different angle.
 
@@ -103,7 +109,9 @@ If the session introduces a new concept:
 1. Explain it in plain [LANGUAGE] with a worked example using real numbers
 2. Ask: "Can you explain this back to me in your own words?"
 3. For project-based mode: consider using `playground/` for an isolated experiment first
-4. Only proceed once the learner confirms understanding
+4. After the learner explains back and you confirm understanding, use a flow control prompt:
+   `→ 1. Ready for practice | 2. I have questions`
+5. Only proceed once the learner signals they are ready
 
 ### Step 4 — Practice / Implement
 

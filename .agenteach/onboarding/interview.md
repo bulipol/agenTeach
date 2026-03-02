@@ -11,6 +11,7 @@ This script guides the AI agent through the initial interview with a new learner
 - Adapt follow-up questions based on answers
 - If the learner provides a documentation link or resource, read it to understand the topic scope
 - At the end: summarize all choices and ask for confirmation before generating files
+- **Question formatting:** Follow `.agenteach/question-formats.md` for how to present choices, confirmations, and transitions. Each question below is annotated with its type.
 
 ---
 
@@ -21,10 +22,12 @@ This script guides the AI agent through the initial interview with a new learner
 - If the learner provides a link (e.g., documentation URL), the agent should read it to understand the scope.
 
 **Q2:** "What's your goal?"
-- Build something specific → MODE = `project-based`
-- Understand concepts / general exploration → MODE = `concept-based`
-- Prepare for a certification or exam → MODE = `concept-based`
+- Type: **Quick Choice**
+- Options:
+  1. Build something specific → MODE = `project-based`
+  2. Understand concepts / prepare for exam → MODE = `concept-based`
 - If ambiguous (e.g., "I want to learn React"), the agent asks: "Do you want to build a specific project with React, or learn React concepts systematically? Or both?"
+- The learner can also type their own answer — the agent determines MODE from their intent.
 
 **Determine MODE here.** All subsequent questions branch based on this choice.
 
@@ -33,10 +36,12 @@ This script guides the AI agent through the initial interview with a new learner
 ## Phase 2 — Skill Level
 
 **Q3:** "How much do you already know about [TOPIC]?"
-- Never touched it → beginner
-- Read about it / watched tutorials → beginner-plus
-- Built small things / did exercises → intermediate
-- Used it professionally / built real projects → advanced
+- Type: **Quick Choice**
+- Options:
+  1. Never touched it → beginner
+  2. Read about it / watched tutorials → beginner-plus
+  3. Built small things / did exercises → intermediate
+  4. Used it professionally / built real projects → advanced
 
 **Q4:** "Is there anything specific you already understand well? Anything you know you struggle with?"
 - This seeds the initial roadmap priorities and the first Dziennik nauki entries.
@@ -47,6 +52,11 @@ This script guides the AI agent through the initial interview with a new learner
 ## Phase 3 — Communication Preferences
 
 **Q5:** "What language should we communicate in? (for explanations, questions, knowledge files)"
+- Type: **Quick Choice**
+- Options:
+  1. English
+  2. Polski
+  3. Other (agent asks which)
 - Sets [LANGUAGE] in AGENTS.md.
 
 **Q6:** "Any preferences for how I teach?"
@@ -121,9 +131,12 @@ Here's what I understood:
 
 **Project structure:**
 [Directory tree showing what will be created]
-
-Does this look right? Anything you want to change?
 ```
+
+- Type: **Yes/No**
+- Options:
+  1. Looks good, let's start
+  2. I want to change something
 
 **Only after learner confirms:** proceed to file generation.
 
