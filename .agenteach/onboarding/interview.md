@@ -60,26 +60,40 @@ This phase collects three things: what to learn, how to learn it, and the starti
 
 ## Phase 2 — Language
 
-**Q5:** Detect the language the learner has been using and confirm it.
+**Q5:** Detect the language the learner has been using and present a clear breakdown of what will be in which language.
+
 - Type: **Yes/No**
-- Example: "We've been writing in Polish — should I continue in Polish for explanations and knowledge files? (Regardless of your choice: code, commits, and technical files are always in English — that's the industry standard.)"
-- Options:
-  1. Yes
-  2. No, I'd prefer [agent asks which language]
+- The agent presents a short summary showing the learner exactly what their language choice affects:
+
+Example (adapt to detected language):
+```
+We've been writing in Polish. Here's how languages will work:
+
+**In Polish:**  conversation, explanations, knowledge notes (knowledge/*.md)
+**In English:** code, commits, project files (AGENTS.md, README, etc.)
+
+Continue in Polish?
+1. Yes
+2. No, I'd prefer a different language
+```
+
 - Sets [LANGUAGE] in AGENTS.md.
 - **Do NOT present a list of languages.** Just confirm the one already being used.
-- **Include the code language note directly in the question** — the learner should see upfront that the language choice applies to explanations only, not code.
+- If the learner says no, ask which language they prefer.
 
-**Code language rule:** Regardless of [LANGUAGE], code and technical artifacts are always in English:
-- Code: variable names, comments, function names → English
-- Commit messages → English
-- File names, directory names → English
-- README.md → English
+**English rule — everything is in English by default:**
+- Code: variable names, comments, function names
+- Commit messages
+- File names, directory names
+- All generated project files: `AGENTS.md`, `README.md`, `CHANGELOG.md`, `SESSION_LOG.md`
+- Roadmap entries, Decisions Made, section headings — all English
 
-[LANGUAGE] applies to:
-- Explanations, questions, and dialogue during sessions
+**[LANGUAGE] applies ONLY to:**
+- Conversation: explanations, questions, and dialogue during sessions (chat)
 - Knowledge files (`knowledge/*.md`) — content and Dziennik nauki
-- Session log entries (the "Learned" and "Next step" parts)
+- Session log: the "Learned" and "Next step" text within entries
+
+**Never mix languages within a single file or sentence.** A file is either fully English or fully [LANGUAGE]. The only exception is `SESSION_LOG.md` where the format/headings are English but "Learned" and "Next step" values are in [LANGUAGE].
 
 ---
 
