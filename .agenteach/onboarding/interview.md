@@ -170,17 +170,47 @@ This phase configures the learning path. The agent is **proactive** — it propo
 
 ### If project-based:
 
-**Q6:** The agent proposes a project AND tech stack together in one message:
+**Q6:** Present 3 concrete project proposals + "własny pomysł" option. Always 4 options total.
 
-"Based on [TOPIC] and your level, here are some project ideas:"
-- Type: **Quick Choice** (agent-generated options)
-- The agent proposes 3–4 concrete projects tailored to [TOPIC] and [SKILL_LEVEL]. Each project should progressively cover key concepts.
-- Include the suggested tech stack in each option.
-- Example for "AI agents" + beginner:
-  1. CLI Agent (TypeScript + AI SDK) — terminal agent that reads files, searches the web, executes tasks
-  2. Chatbot with tools (TypeScript + AI SDK) — bot that checks weather, calculates, searches
-  3. Multi-agent pipeline (TypeScript + AI SDK) — multiple agents collaborating on a task
-- The learner picks a number or writes their own idea.
+Each proposal must show:
+- **Level** (beginner / beginner+ / intermediate) and estimated sessions
+- **Co zbudujesz** — one sentence, concrete end result
+- **Czego się nauczysz** — 3–4 specific concepts/skills, not vague ("you'll learn the SDK")
+
+Proposals must genuinely differ in scope, difficulty, and concepts covered — not just be the same project with more features.
+
+Example for "Vercel AI SDK" + beginner:
+```
+Mam kilka pomysłów. Różnią się zakresem i tym, czego się nauczysz:
+
+1. CLI Chatbot  (beginner, ~4 sesje)
+   Zbudujesz: bot w terminalu odpowiadający na pytania
+   Nauczysz się: generateText, streamText, historia rozmowy
+
+2. Web Chatbot z Next.js  (beginner+, ~7 sesji)
+   Zbudujesz: pełna apka webowa z interfejsem czatu
+   Nauczysz się: to co wyżej + useChat, Server Actions, deployment na Vercel
+
+3. Agent z narzędziami  (intermediate, ~10 sesji)
+   Zbudujesz: bot który czyta pliki, szuka w internecie, wykonuje zadania
+   Nauczysz się: tools, multi-step reasoning, error handling, strukturyzowane odpowiedzi
+
+4. Własny pomysł — opisz co chcesz zbudować
+
+Który poziom Cię interesuje?
+```
+
+**If learner picks option 4 (własny pomysł):**
+
+Ask one open question:
+```
+Opisz mi pomysł — co chcesz zbudować i do czego ma służyć?
+```
+
+Then react based on the answer — max one follow-up:
+- **Clear + fits level:** propose a scoped roadmap immediately
+- **Too ambitious for level:** propose a starting point that leads to their goal: *"To świetny cel końcowy. Proponuję zacząć od [mniejsza wersja] — dojdziesz tam przez 3 etapy."*
+- **Too vague:** ask one clarifying question: *"Czy to ma być dla Ciebie (narzędzie), portfolio, czy coś dla innych użytkowników?"*
 
 **Defaults applied automatically (no questions asked):**
 - Libraries: use established libraries for non-core stuff (focus on learning [TOPIC] itself)
@@ -189,26 +219,57 @@ This phase configures the learning path. The agent is **proactive** — it propo
 
 ### If concept-based:
 
-**Q6:** The agent proposes an exam/structure AND timeline together:
+**Q6:** Present 3 study path proposals + "własna ścieżka" option. Always 4 options total.
 
-"Here are common paths for learning [TOPIC]:"
-- Type: **Quick Choice** (agent-generated options)
-- The agent proposes likely certifications/exams for [TOPIC], plus a general option. Include timeline assumptions.
-- Example for "AWS":
-  1. AWS Solutions Architect Associate (SAA-C03) — at your own pace
-  2. AWS Developer Associate (DVA-C02) — at your own pace
-  3. General AWS knowledge — no specific exam, just understanding
-- The learner picks a number or writes their own path.
+Options differ by **goal** (exam / interviews / general understanding), not difficulty. Each shows:
+- **Cel** — what the learner achieves at the end
+- **Zakres** — key topics covered
+- **Czas** — estimated sessions
 
-**If the learner picks a specific exam, follow up:**
+Example for "AWS" + beginner:
+```
+Mam kilka ścieżek nauki. Różnią się celem:
 
-**Q7:** "Do you have a deadline for this?"
-- Type: **Quick Choice**
-- Options:
-  1. No — learning at my own pace
-  2. Yes (agent asks for the date)
-- Sets [TIMELINE] in AGENTS.md.
-- Skip this question for "general knowledge" path — default to no deadline.
+1. SAA-C03 (Solutions Architect Associate)
+   Cel: certyfikat AWS, najbardziej popularny
+   Zakres: EC2, S3, VPC, IAM, RDS, CloudFront + architektura systemów
+   Czas: ~15 sesji
+
+2. Ogólna wiedza AWS (bez egzaminu)
+   Cel: rozumieć ekosystem, lepiej współpracować z devopsami
+   Zakres: najważniejsze serwisy, kiedy co używać, podstawy architektury
+   Czas: ~8 sesji
+
+3. AWS dla developerów (pod DVA-C02)
+   Cel: certyfikat zorientowany na coding i deployment
+   Zakres: Lambda, API Gateway, DynamoDB, CodePipeline, CDK
+   Czas: ~12 sesji
+
+4. Własna ścieżka — opisz swój cel
+
+Którą ścieżką chcesz iść?
+```
+
+**If learner picks option 4 (własna ścieżka):**
+
+Ask one open question:
+```
+Opisz mi swój cel — do czego chcesz wykorzystać tę wiedzę?
+```
+
+Then react based on the answer — max one follow-up:
+- **Specific exam not in list:** confirm it, build a topic list for that exam
+- **Job interviews:** propose interview-focused curriculum (common system design patterns, classic problems)
+- **Work context:** *"Żebym mógł dobrze zaplanować — jedno pytanie: z czym konkretnie chcesz lepiej rozumieć: architekturą, deploymentem, czy bezpieczeństwem?"*
+- **Too vague:** *"Jedno pytanie: interesuje Cię egzamin, przygotowanie do rozmów, czy po prostu ogólne rozumienie tematu?"*
+
+**Q7 — deadline (only if learner picked a specific exam or certification):**
+```
+Masz jakiś deadline na ten egzamin?
+1. Nie, uczę się we własnym tempie
+2. Tak (podaj datę)
+```
+Skip for "general knowledge" or "własna ścieżka" paths — default to no deadline.
 
 **Defaults applied automatically (no questions asked):**
 - Study materials: agent proposes a topic structure. If the learner has materials, they'll mention them.
