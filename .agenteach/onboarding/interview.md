@@ -17,7 +17,7 @@ Before asking any questions, parse the learner's first message and extract:
 
 **For each field that was NOT detected:** ask the corresponding Phase 1 question normally — one question at a time, never two in one message.
 
-**Language rule:** Use the learner's language throughout the entire onboarding. Never switch languages mid-sentence. If the first message is just a product name (no language signal), use the language of the UI/conversation.
+**Language rule:** Use the learner's language throughout the entire onboarding. Never switch languages mid-sentence. If the first message contains no language signal (e.g., `/teach:start`, a product name, or a single word), **default to Polish**. Switch to another language only if the learner writes full sentences in it.
 
 **Goal:** Reduce onboarding from 5–8 exchanges to 2–3 by skipping questions already answered in the learner's messages.
 
@@ -89,7 +89,7 @@ Najpierw ustawię Twój plan nauki.
 ```
 
 **Rules:**
-- Use the learner's language from the first message. Never mix languages mid-sentence.
+- **Default language: Polish.** Switch only if the learner writes full sentences in another language.
 - If the learner's first message already contains the topic, skip the last question — confirm the topic inline and move to the next undetected field.
 - Adapt the bullet points to be natural, not robotic. These are examples, not a script.
 
