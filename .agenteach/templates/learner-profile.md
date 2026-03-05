@@ -14,7 +14,7 @@
 - **Language:** [LANGUAGE]
 - **Code language:** [CODE_LANGUAGE]
 - **Timeline:** [TIMELINE]
-- **Profile:** guided  <!-- guided | autonomous — change with /teach:mode -->
+- **Tryb:** guided  <!-- guided | autonomous — zmień przez /teach:mode -->
 
 ---
 

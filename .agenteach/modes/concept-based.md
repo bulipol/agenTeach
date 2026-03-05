@@ -49,24 +49,24 @@ When the learner runs `/teach:status`, show this format for concept-based mode:
 
 ```
 --- DASHBOARD ---
-Topic: [TOPIC]
-Mode: concept-based | Level: [SKILL_LEVEL] | Profile: [guided|autonomous]
+Temat: [TOPIC]
+Typ nauki: concept-based | Poziom: [SKILL_LEVEL] | Tryb: [guided|autonomous]
 
-Roadmap: [X]/[Y] tematów ([Z]%)
-  [progress bar] [Topic] — [STATUS] | Weight: [exam %]
-  ...
-  Odblokowane: [topics unlocked but not started]
+Roadmapa: [X]/[Y] tematów ([Z]%)
+  [##--------] [Temat] — W TRAKCIE | Waga: [%]
+  [----------] [Temat] — DO ZROBIENIA | Waga: [%]
+  Odblokowane: [tematy gotowe do rozpoczęcia]
 
-Słabe strony: [from LEARNER.md Weak Areas, or "brak"]
-Zaległe powtórki: [overdue spaced repetition topics, or "brak"]
-Sesji: [count] | Ostatnia: [date]
-Next step: [from SESSION_LOG.md]
+Słabe strony: [z LEARNER.md, lub "brak"]
+Zaległe powtórki: [lub "brak"]
+Sesji: [N] | Ostatnia: [data]
+Następny krok: [z SESSION_LOG.md]
 
 Walidacja:
-  - LEARNER.md: [OK | MISSING]
+  - LEARNER.md: [OK | BRAK]
   - SESSION_LOG: [OK | brak wpisu z ostatniej sesji]
   - Roadmapa: [OK | N tematów bez knowledge files]
-  - Powtórki: [OK | N zaległych (list them)]
+  - Powtórki: [OK | N zaległych]
 ---
 ```
 

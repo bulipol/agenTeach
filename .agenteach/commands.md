@@ -54,21 +54,21 @@ Show the full dashboard with progress and validation. Format:
 
 ```
 --- DASHBOARD ---
-Topic: [TOPIC]
-Mode: [MODE] | Level: [SKILL_LEVEL] | Profile: [guided|autonomous]
+Temat: [TOPIC]
+Typ nauki: [project-based|concept-based] | Poziom: [SKILL_LEVEL] | Tryb: [guided|autonomous]
 
-Roadmap: [X]/[Y] tematów ([Z]%)
-  [####------] Stage [N]: [name] — IN PROGRESS
-  [----------] Stage [N+1]: [name] — NOT STARTED
-  Odblokowane: [unlocked topics]
+Roadmapa: [X]/[Y] etapów ([Z]%)
+  [##--------] Etap [N]: [name] — W TRAKCIE
+  [----------] Etap [N+1]: [name] — DO ZROBIENIA
+  Odblokowane: [tematy gotowe do rozpoczęcia]
 
-Słabe strony: [weak areas from LEARNER.md, or "brak"]
-Zaległe powtórki: [overdue topics, or "brak"]
-Sesji: [count from SESSION_LOG.md] | Ostatnia: [date]
-Next step: [from SESSION_LOG.md "Next step" field]
+Słabe strony: [z LEARNER.md, lub "brak"]
+Zaległe powtórki: [lub "brak"]
+Sesji: [N] | Ostatnia: [data]
+Następny krok: [z SESSION_LOG.md]
 
 Walidacja:
-  - LEARNER.md: [OK | MISSING]
+  - LEARNER.md: [OK | BRAK]
   - SESSION_LOG: [OK | brak wpisu z ostatniej sesji]
   - Roadmapa: [OK | N tematów bez knowledge files]
   - Powtórki: [OK | N zaległych]
@@ -92,7 +92,7 @@ Zmienić?
 2. Nie, zostań
 ```
 
-After switching, update `Profile:` in LEARNER.md.
+After switching, update `Tryb:` in LEARNER.md.
 
 ---
 

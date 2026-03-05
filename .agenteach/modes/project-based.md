@@ -45,26 +45,25 @@ When the learner runs `/teach:status`, show this format for project-based mode:
 
 ```
 --- DASHBOARD ---
-Topic: [TOPIC]
-Mode: project-based | Level: [SKILL_LEVEL] | Profile: [guided|autonomous]
+Temat: [TOPIC]
+Typ nauki: project-based | Poziom: [SKILL_LEVEL] | Tryb: [guided|autonomous]
 Stack: [TECH_STACK]
 
-Track A (Build): [X]/[Y] stages ([Z]%)
-  [####------] Stage [N]: [name] — IN PROGRESS
-  [----------] Stage [N+1]: [name] — NOT STARTED
-  ...
+Track A (Budowanie): [X]/[Y] etapów ([Z]%)
+  [##--------] Etap [N]: [name] — W TRAKCIE
+  [----------] Etap [N+1]: [name] — DO ZROBIENIA
 
-Track B (Learn): [X]/[Y] topics done
-  Done: [topic1], [topic2]
-  Odblokowane: [topics ready to start based on dependency graph]
-  Następne: [topics unlocked by current stage]
+Track B (Nauka): [X]/[Y] tematów ukończonych
+  Ukończone: [topic1], [topic2]
+  Odblokowane: [tematy gotowe do rozpoczęcia]
+  Następne: [tematy odblokowane przez aktualny etap]
 
-Słabe strony: [from LEARNER.md Weak Areas, or "brak"]
-Sesji: [count] | Ostatnia: [date]
-Next step: [from SESSION_LOG.md]
+Słabe strony: [z LEARNER.md, lub "brak"]
+Sesji: [N] | Ostatnia: [data]
+Następny krok: [z SESSION_LOG.md]
 
 Walidacja:
-  - LEARNER.md: [OK | MISSING]
+  - LEARNER.md: [OK | BRAK]
   - SESSION_LOG: [OK | brak wpisu z ostatniej sesji]
   - Roadmapa: [OK | N tematów bez knowledge files]
 ---
