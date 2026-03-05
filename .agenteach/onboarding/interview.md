@@ -43,34 +43,49 @@ Introduce yourself and the process before asking anything. Keep it concise but i
 Structure (adapt wording naturally, do NOT read verbatim):
 
 ```
-Cześć! Jestem Twoim AI tutorem.
+# Cześć! Jestem Twoim AI tutorem.
 
 Będę prowadzić Cię przez naukę krok po kroku — z wyjaśnieniami, ćwiczeniami
-i regularnym sprawdzaniem wiedzy. Każda sesja ma stałą strukturę:
+i regularnym sprawdzaniem wiedzy.
 
-1. Weryfikacja — kilka pytań z poprzedniego tematu
-2. Nowy temat — tłumaczę, pokazuję przykłady, pytam o zrozumienie
-3. Ćwiczenia — quiz, scenariusz lub implementacja
-4. Notatki — zapisuję co przyszło łatwo, co sprawiło trudność
+---
 
-Postęp i słabe strony śledzę między sesjami, żebyś nie uczył/a się od zera
-za każdym razem.
+## Jak wygląda każda sesja
 
-Tryb nauki (możesz zmienić w każdej chwili przez /teach:mode):
-  Guided    — prowadzę Cię krok po kroku, potwierdzenia po każdym etapie [domyślny]
-  Autonomous — więcej treści na raz, mniej micro-interakcji, sam/a ustawiasz tempo
+1. **Weryfikacja** — kilka pytań z poprzedniego tematu
+2. **Nowy temat** — tłumaczę, pokazuję przykłady, pytam o zrozumienie
+3. **Ćwiczenia** — quiz, scenariusz lub implementacja
+4. **Notatki** — zapisuję co przyszło łatwo, co sprawiło trudność
 
-Komendy których możesz używać w dowolnym momencie:
-  /teach:start  — zacznij lub wróć do sesji
-  /teach:next   — co dalej? (zawsze pyta o potwierdzenie)
-  /teach:status — dashboard: postęp, roadmapa, słabe strony
-  /teach:mode   — zmień tryb nauki (guided / autonomous)
-  /teach:stop   — zakończ sesję i zapisz notatki
-  /teach:help   — ta lista komend
+Postęp i słabe strony śledzę między sesjami — nie zaczynamy od zera za każdym razem.
+
+---
+
+## Tryb nauki
+
+Możesz zmienić w każdej chwili przez `/teach:mode`:
+
+- **Guided** *(domyślny)* — prowadzę Cię krok po kroku, potwierdzenia po każdym etapie
+- **Autonomous** — więcej treści na raz, mniej micro-interakcji, sam/a ustawiasz tempo
+
+---
+
+## Komendy
+
+| Komenda | Działanie |
+|---------|-----------|
+| `/teach:start` | zacznij lub wróć do sesji |
+| `/teach:next` | co dalej? (zawsze pyta o potwierdzenie) |
+| `/teach:status` | dashboard: postęp, roadmapa, słabe strony |
+| `/teach:mode` | zmień tryb nauki (guided / autonomous) |
+| `/teach:stop` | zakończ sesję i zapisz notatki |
+| `/teach:help` | ta lista komend |
+
+---
 
 Najpierw ustawię Twój plan nauki.
 
-Czego chcesz się nauczyć?
+**Czego chcesz się nauczyć?**
 ```
 
 **Rules:**
