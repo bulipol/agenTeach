@@ -8,32 +8,18 @@ This script guides the AI agent through the initial interview with a new learner
 
 Before asking any questions, parse the learner's first message and extract:
 
-1. **Topic** — what they want to learn (explicit mention or implied by context)
-2. **Mode** — project-based (keywords: "build", "project", "implement", "create") vs concept-based (keywords: "study", "exam", "prepare", "understand", "theory")
-3. **Level** — any self-assessment ("beginner", "never used it", "know basics", "experienced", "advanced")
+1. **Topic** — what they want to learn
+2. **Mode** — project-based (keywords: "build", "implement", "create", SDK, library, framework) vs concept-based (keywords: "study", "exam", "prepare", "understand", "theory", "certification")
+3. **Level** — self-assessment keywords ("beginner", "never used it", "know basics", "experienced", "advanced")
 4. **Language** — the language the learner is writing in
 
-Present all detected information in a single confirmation message before asking anything else:
+**For each field that was detected:** skip the corresponding question in Phase 1. Confirm the detected value inline (e.g., "Widzę, że chcesz się nauczyć [TOPIC]") and proceed to the next undetected field.
 
-```
-Widzę, że chcesz się nauczyć [TOPIC].
+**For each field that was NOT detected:** ask the corresponding Phase 1 question normally — one question at a time, never two in one message.
 
-Oto co wykryłem z Twojej wiadomości:
-- Temat: [TOPIC]
-- Tryb: [project-based / concept-based] (bo [short reason, e.g. "wspomniałeś/aś o budowaniu"])
-- Poziom: [level] (bo [short reason, or "nie podałeś/aś — zakładam beginner"])
-- Język: [LANGUAGE]
+**Language rule:** Use the learner's language throughout the entire onboarding. Never switch languages mid-sentence. If the first message is just a product name (no language signal), use the language of the UI/conversation.
 
-Zgadza się?
-1. Tak, zaczynamy
-2. Zmienię coś
-```
-
-**If confirmed:** Skip Phase 1 questions that were already detected. Jump directly to Phase 3 (Setup) with the confirmed values.
-
-**If only topic is clear:** Confirm topic, then ask mode + level in a single follow-up (two questions in one message as a list, not separately).
-
-**Goal:** Reduce onboarding from 5–8 exchanges to 2–3.
+**Goal:** Reduce onboarding from 5–8 exchanges to 2–3 by skipping questions already answered in the learner's messages.
 
 ---
 
@@ -52,18 +38,21 @@ Zgadza się?
 
 ## Phase 0 — Welcome
 
-Before asking any questions, the agent introduces the process. Keep it short (3–5 sentences):
+One short message. Keep it to 2 sentences max:
 
-1. **What this is:** "I'm your AI tutor. I'll guide you through learning [topic] step by step — with explanations, practice, and regular knowledge checks."
-2. **How it works:** "First, a few quick questions to set up your learning plan. Then we start right away."
+1. "Cześć! Czego chcesz się nauczyć?" — or equivalent in the learner's language.
 
-Adapt the wording to [TOPIC] and keep it natural. Do NOT read this template verbatim. If the learner's first message already contains the topic, incorporate it into the welcome.
+Do NOT say "a few quick questions". Do NOT list how the process works. Just ask for the topic.
+
+If the learner's first message already contains the topic (e.g., they typed a subject immediately), skip this phase entirely — go straight to Auto-Detection.
+
+**Language rule:** Use the learner's language from the very first message. Never switch to English mid-sentence (e.g., "Got it — topic" is wrong; say "Świetnie — topic" or "Got it — topic" — pick one language and stay in it).
 
 ---
 
 ## Phase 1 — Topic, Goal, and Level
 
-This phase collects three things: what to learn, how to learn it, and the starting level. Combine and skip questions when the learner's messages already provide the answers.
+This phase collects three things: what to learn, how to learn it, and the starting level. Skip any question already answered by auto-detection. **One question per message — never ask two things at once.**
 
 **Q1:** "What do you want to learn?"
 - If the learner's first message already states the topic (e.g., "I want to learn AI agents"), **do not re-ask**. Confirm it: "Got it — [TOPIC]." and move to Q2.
