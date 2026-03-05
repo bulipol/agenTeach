@@ -45,7 +45,7 @@ If you don't need reusable scenarios, skip `scenarios/` entirely — practice qu
 
 ## Dashboard (`/teach:status`)
 
-When the learner runs `/teach:status`, show this format for concept-based mode:
+When the learner runs `/teach:status`, show this format for concept-based mode. **Output as a code block** (wrap in ` ``` `) so formatting renders correctly.
 
 ```
 --- DASHBOARD ---

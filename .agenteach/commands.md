@@ -50,7 +50,7 @@ Only propose topics whose prerequisites are marked DONE in LEARNER.md. Always wa
 
 ## `/teach:status`
 
-Show the full dashboard with progress and validation. Format:
+Show the full dashboard with progress and validation. **Output it as a code block** (wrap in ` ``` `) so the formatting renders correctly — same as SESSION START/END blocks.
 
 ```
 --- DASHBOARD ---

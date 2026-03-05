@@ -198,6 +198,8 @@ Mam kilka pomysłów. Różnią się zakresem i tym, czego się nauczysz:
 4. Własny pomysł — opisz co chcesz zbudować
 
 Który poziom Cię interesuje?
+
+*(Każdy projekt możesz rozszerzyć po ukończeniu — agent zaproponuje kolejne kroki.)*
 ```
 
 **If learner picks option 4 (własny pomysł):**
@@ -248,6 +250,8 @@ Mam kilka ścieżek nauki. Różnią się celem:
 4. Własna ścieżka — opisz swój cel
 
 Którą ścieżką chcesz iść?
+
+*(Po ukończeniu ścieżki agent zaproponuje kolejne certyfikaty lub zaawansowane tematy.)*
 ```
 
 **If learner picks option 4 (własna ścieżka):**
