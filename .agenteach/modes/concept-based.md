@@ -43,6 +43,37 @@ If you don't need reusable scenarios, skip `scenarios/` entirely — practice qu
 
 ---
 
+## Dashboard (`/teach:status`)
+
+When the learner runs `/teach:status`, show this format for concept-based mode:
+
+```
+--- DASHBOARD ---
+Topic: [TOPIC]
+Mode: concept-based | Level: [SKILL_LEVEL] | Profile: [guided|autonomous]
+
+Roadmap: [X]/[Y] tematów ([Z]%)
+  [progress bar] [Topic] — [STATUS] | Weight: [exam %]
+  ...
+  Odblokowane: [topics unlocked but not started]
+
+Słabe strony: [from LEARNER.md Weak Areas, or "brak"]
+Zaległe powtórki: [overdue spaced repetition topics, or "brak"]
+Sesji: [count] | Ostatnia: [date]
+Next step: [from SESSION_LOG.md]
+
+Walidacja:
+  - LEARNER.md: [OK | MISSING]
+  - SESSION_LOG: [OK | brak wpisu z ostatniej sesji]
+  - Roadmapa: [OK | N tematów bez knowledge files]
+  - Powtórki: [OK | N zaległych (list them)]
+---
+```
+
+To compute overdue reviews: check "Last Reviewed" dates in the roadmap against the spaced repetition schedule below.
+
+---
+
 ## Roadmap Format
 
 Concept-based learning uses a single topic list, optionally weighted by importance.

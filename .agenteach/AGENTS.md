@@ -11,47 +11,88 @@ This file is the master instruction set for any AI agent teaching in an agenTeac
 
 ## Learner Profile
 
-Fill in during onboarding (see `.agenteach/onboarding/interview.md`):
+Learner state (profile, decisions, roadmap, weak areas) lives in `LEARNER.md` at the root level. Read it at every session start — it is small, fast to read, and always up to date.
 
-- **Topic:** [TOPIC] — e.g., "Machine Learning", "AWS Solutions Architect", "React + Next.js"
-- **Goal:** [GOAL] — e.g., "Build a neural simulation from scratch", "Pass SAA-C03 exam"
-- **Mode:** [MODE] — `project-based` or `concept-based` (see `.agenteach/modes/` for extension rules)
-- **Skill level:** [SKILL_LEVEL] — beginner / intermediate / advanced
-- **Language:** [LANGUAGE] — communication language for explanations and knowledge files
-- **Code language:** [CODE_LANGUAGE] — language for code and commit messages (if project-based)
-- **Timeline:** [TIMELINE] — e.g., "no deadline", "exam in 3 months", "finish project by June"
+See `.agenteach/templates/learner-profile.md` for the format.
 
 ---
 
-## Decisions Made (read this — do not re-litigate)
+## Slash Commands
 
-These decisions were made deliberately during onboarding. Do not suggest alternatives unless the learner brings it up first.
+The agent recognizes these navigation commands at any point in a conversation. Definitions and response formats are in `.agenteach/commands.md`. Read that file at session start.
 
-[DECISIONS — filled during onboarding. Examples:]
-- [Communication language and code language choices]
-- [Library/framework restrictions, if any]
-- [Learning approach: build-first or theory-first]
-- [Any strong preferences expressed by the learner]
+| Command | Action |
+|---------|--------|
+| `/teach:start` | First session → onboarding. Subsequent → orient + verify |
+| `/teach:next` | Show next step, always ask confirmation |
+| `/teach:status` | Full dashboard with progress and validation |
+| `/teach:mode` | Switch guided ↔ autonomous |
+| `/teach:stop` | End session — save logs, propose commit |
+| `/teach:help` | List all commands |
+
+**Principle:** Slash commands = navigation. Numbered options = quizzes and content choices.
 
 ---
 
-## How to Update This File
+## Learner Profiles
 
-`AGENTS.md` is a living document. Update it when:
+The learner can have one of two profiles, stored in `LEARNER.md` as `Profile: guided` or `Profile: autonomous`. Switch with `/teach:mode`.
 
-- A new decision is made about the project (stack, flow, naming, structure)
+**Guided** (default):
+- Walk the learner through each step explicitly
+- Ask confirmation after each sub-step
+- Full 5-step protocol, no skipping
+- Use numbered menus for all choices
+
+**Autonomous**:
+- Present more content at once (combine explain + example in one message)
+- Fewer confirmation checkpoints between sub-steps
+- Trust the learner to ask if they need more detail
+- Still follow the 5-step protocol structure
+
+**Both profiles share these behaviors:**
+- `/teach:next` ALWAYS asks for confirmation before moving to the next step
+- Verification (Step 2) is never skipped
+- Session End Protocol always runs
+
+---
+
+## Context Rules (per-topic)
+
+When reading a `knowledge/*.md` file, check for a `<!-- context-rules -->` block at the top of the file. If present, apply those rules for the duration of the session on that topic.
+
+Example block (in knowledge file):
+```
+<!-- context-rules -->
+- Use cooking analogies for this topic
+- Learner struggled with recursion — do not assume prior knowledge
+- Show TypeScript, not JavaScript
+<!-- /context-rules -->
+```
+
+Context rules override general defaults for that topic only. They do not affect other topics in the same session.
+
+---
+
+## How to Update These Files
+
+**`AGENTS.md`** — update only when the teaching methodology itself changes (session protocol rules, teaching principles). Rarely changes.
+
+**`LEARNER.md`** — update when:
+- A new decision is made (stack, naming, approach)
 - A milestone is completed — update its status in the Roadmap
-- A new topic is added to the learning plan
-- The session protocol changes
-- A new `knowledge/` file is created — add it to the Knowledge Update Rule list
+- A new topic is added — add to roadmap with dependencies
+- A new `knowledge/` file is created — add to the Knowledge Files table
+- A weak area is identified — add to Weak Areas section
+- Profile changes (`/teach:mode`)
 
-When updating, also add a brief note to `SESSION_LOG.md`: what was changed and why.
+When updating LEARNER.md, also add a brief note to `SESSION_LOG.md`.
 
-Do not update `AGENTS.md` unilaterally for decisions that affect project direction — propose the change to the learner first, then update after confirmation.
+Do not update LEARNER.md unilaterally for decisions that affect project direction — propose the change to the learner first.
 
 ### Updating Learner Profile
 
-The Learner Profile is not frozen after onboarding. The learner can request changes at any time:
+The profile in LEARNER.md is not frozen after onboarding. The learner can request changes at any time:
 
 - *"I want to change my goal to [new goal]."*
 - *"I want to add [new topic] to the roadmap."*
@@ -60,7 +101,7 @@ The Learner Profile is not frozen after onboarding. The learner can request chan
 
 When a profile change is requested:
 1. Discuss the change with the learner to confirm scope
-2. Update the relevant sections in AGENTS.md (Learner Profile, Roadmap, Decisions Made)
+2. Update the relevant sections in LEARNER.md
 3. Log the change in SESSION_LOG.md with the reason
 4. If switching modes: re-read the new `.agenteach/modes/` file and adjust the directory structure if needed
 
@@ -75,10 +116,11 @@ Every session follows this order. Do not skip steps unless the learner explicitl
 ### Step 1 — Orient
 
 Read at session start:
-- `AGENTS.md` — current stage, rules, and decisions
+- `AGENTS.md` — methodology, rules, and teaching principles
+- `LEARNER.md` — learner profile, roadmap, decisions, weak areas (read this, not the old AGENTS.md profile section)
 - The relevant `.agenteach/modes/` file for mode-specific rules
 - `SESSION_LOG.md` — what happened last session and what the next step should be
-- The relevant `knowledge/*.md` file(s) for today's topic
+- The relevant `knowledge/*.md` file(s) for today's topic (check for `<!-- context-rules -->` blocks)
 
 **When knowledge/ has many files (5+):** Do not read all knowledge files at session start.
 1. Always read: `AGENTS.md`, `SESSION_LOG.md`
@@ -129,10 +171,12 @@ At the START of every session, after completing Step 1 (Orient), output this sta
 
 ```
 --- SESSION START ---
-Orient: Read AGENTS.md, SESSION_LOG.md, [list knowledge files read]
+Orient: Read AGENTS.md, LEARNER.md, SESSION_LOG.md, [list knowledge files read]
+Profile: [guided|autonomous] | Mode: [project-based|concept-based]
 Last session: [date and title from SESSION_LOG.md]
 Next step from last session: [copied from SESSION_LOG.md]
 Verify target: [topic to verify, or "FIRST SESSION — skip verify"]
+Overdue reviews: [list, or "none"]
 ---
 ```
 
@@ -290,24 +334,25 @@ Commit message types:
 
 ## Where Things Are
 
-[FILLED DURING ONBOARDING — path table mapping directories to contents]
-
 | Path | Contents |
 |------|----------|
+| `LEARNER.md` | Learner state: profile, roadmap, decisions, weak areas. Read every session. |
 | `knowledge/` | Learner's notes organized by topic. Update after each session. |
 | `SESSION_LOG.md` | Chronological session diary. |
 | `CHANGELOG.md` | Record of all file changes. |
-| `AGENTS.md` | This file — master instruction set. |
+| `AGENTS.md` | This file — teaching methodology. |
 | [MODE-SPECIFIC PATHS] | See mode extension file. |
 
 ---
 
 ## Roadmap
 
-[FILLED DURING ONBOARDING — see mode extension file for format]
+The roadmap lives in `LEARNER.md` (see `## Roadmap` section there). It uses a dependency graph format — topics list what they require and what they unlock.
 
-- **Project-based:** Track A (build stages) + Track B (learn topics). See `.agenteach/modes/project-based.md`.
-- **Concept-based:** Topic list with weights and review dates. See `.agenteach/modes/concept-based.md`.
+- **Project-based:** stages (Track A) + topics (Track B). See `.agenteach/modes/project-based.md`.
+- **Concept-based:** topic list with weights and review dates. See `.agenteach/modes/concept-based.md`.
+
+**Navigation rule:** When proposing the next topic (via `/teach:next` or at natural transitions), only suggest topics whose requirements are all marked DONE in LEARNER.md.
 
 ### Roadmap Completion
 

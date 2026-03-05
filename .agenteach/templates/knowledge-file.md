@@ -2,6 +2,14 @@
 
 > Status: [not started | in progress | reviewed | mastered]
 
+<!-- context-rules -->
+<!-- Per-topic rules the agent should follow for this subject. Examples:
+- Use cooking analogies for this topic
+- Learner struggled with recursion — do not assume prior knowledge
+- Show TypeScript examples, not JavaScript
+-->
+<!-- /context-rules -->
+
 ---
 
 ## [Core Concept Section]

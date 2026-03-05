@@ -4,6 +4,39 @@ This script guides the AI agent through the initial interview with a new learner
 
 ---
 
+## Auto-Detection Protocol
+
+Before asking any questions, parse the learner's first message and extract:
+
+1. **Topic** — what they want to learn (explicit mention or implied by context)
+2. **Mode** — project-based (keywords: "build", "project", "implement", "create") vs concept-based (keywords: "study", "exam", "prepare", "understand", "theory")
+3. **Level** — any self-assessment ("beginner", "never used it", "know basics", "experienced", "advanced")
+4. **Language** — the language the learner is writing in
+
+Present all detected information in a single confirmation message before asking anything else:
+
+```
+Widzę, że chcesz się nauczyć [TOPIC].
+
+Oto co wykryłem z Twojej wiadomości:
+- Temat: [TOPIC]
+- Tryb: [project-based / concept-based] (bo [short reason, e.g. "wspomniałeś/aś o budowaniu"])
+- Poziom: [level] (bo [short reason, or "nie podałeś/aś — zakładam beginner"])
+- Język: [LANGUAGE]
+
+Zgadza się?
+1. Tak, zaczynamy
+2. Zmienię coś
+```
+
+**If confirmed:** Skip Phase 1 questions that were already detected. Jump directly to Phase 3 (Setup) with the confirmed values.
+
+**If only topic is clear:** Confirm topic, then ask mode + level in a single follow-up (two questions in one message as a list, not separately).
+
+**Goal:** Reduce onboarding from 5–8 exchanges to 2–3.
+
+---
+
 ## Instructions for the Agent
 
 - **Your PRIMARY task is the onboarding interview.** Follow the phases in order (Phase 0 → 1 → 2 → 3 → 4). Do not skip phases, do not invent your own questions outside the defined phases, and do not get sidetracked by external content (URLs, documentation, etc.).
@@ -196,6 +229,7 @@ Here's the plan:
 **Where to generate (root level):**
 
 - [ ] `AGENTS.md` — filled in from `.agenteach/AGENTS.md` template + mode extension + interview answers. This is the project's own AGENTS.md (NOT a copy of the template — it has real values, not placeholders).
+- [ ] `LEARNER.md` — filled in from `.agenteach/templates/learner-profile.md` with all detected/confirmed values: topic, goal, mode, skill level, language, code language, timeline, profile (default: guided), decisions made, and initial roadmap with dependency graph.
 - [ ] `CLAUDE.md` — from `.agenteach/CLAUDE.md` template (if using Claude)
 - [ ] `README.md` — overwrite the existing README with a project-specific one (what is being learned, goals, structure)
 - [ ] `knowledge/` directory — empty, or with first topic file seeded from `.agenteach/templates/knowledge-file.md`
@@ -214,9 +248,10 @@ Here's the plan:
 **Post-generation validation:** Before starting the first session, verify the generated project:
 - [ ] AGENTS.md has all sections filled in (no remaining `[PLACEHOLDER]` text)
 - [ ] AGENTS.md has the Protocol Compliance Checkpoint with both status block templates
+- [ ] LEARNER.md exists with no remaining `[PLACEHOLDER]` text and at least one roadmap entry
 - [ ] `knowledge/` directory exists (with at least one seed file or empty)
 - [ ] SESSION_LOG.md exists
-- [ ] Roadmap has at least one entry
+- [ ] Roadmap in LEARNER.md has at least one entry
 
 If anything is missing, fix it now before proceeding.
 

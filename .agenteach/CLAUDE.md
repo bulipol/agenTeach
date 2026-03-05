@@ -1,6 +1,14 @@
 # CLAUDE.md — Claude Code Instructions
 
-Read `AGENTS.md` first. This file adds only Claude Code-specific behavior on top of it.
+Read `AGENTS.md` and `LEARNER.md` first. This file adds only Claude Code-specific behavior on top of them.
+
+---
+
+## Slash Commands
+
+Recognize `/teach:*` commands anywhere in the conversation. When you see one, respond as defined in `.agenteach/commands.md`. Read that file at session start alongside `AGENTS.md` and `LEARNER.md`.
+
+If the user types `/teach:start`, check whether `LEARNER.md` exists at the root level to determine first vs subsequent session.
 
 ---
 
