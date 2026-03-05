@@ -9,6 +9,7 @@ This file defines how the AI agent presents questions to the learner. It applies
 ## Core Principle
 
 **Numbers are the universal shortcut.** When presenting options, number them. The learner can respond with:
+
 - A **number** (`2`)
 - **Natural language** (`I want to build a project`)
 - **Their own answer** if none of the options fit
@@ -101,25 +102,25 @@ The arrow (`→`) and inline format signal this is a quick transition, not a con
 
 ## Interview Question Mapping
 
-| Question | Type | Notes |
-|----------|------|-------|
-| Q1: What to learn? | Auto-detect or Open-Ended | Extract from first message if possible, confirm |
-| Q2: How to learn? | Quick Choice | 1. Build a project / 2. Study concepts |
-| Q3: Skill level? | Quick Choice | 1. Nothing / 2. A little / 3. Some / 4. A lot |
-| Q4: Strengths/weaknesses? | Open-Ended | Only if level >= intermediate, skip for beginners |
-| Q5: Language? | Yes/No (auto-detect) | Confirm detected language, don't present a list |
-| Q6: Project/path + stack | Quick Choice (agent-generated) | Agent proposes 3–4 options with tech stack included |
-| Q7: Deadline? (concept only) | Quick Choice | Only if exam selected. 1. No / 2. Yes |
-| Confirmation | Yes/No | Summary + defaults listed |
+| Question                     | Type                           | Notes                                               |
+| ---------------------------- | ------------------------------ | --------------------------------------------------- |
+| Q1: What to learn?           | Auto-detect or Open-Ended      | Extract from first message if possible, confirm     |
+| Q2: How to learn?            | Quick Choice                   | 1. Build a project / 2. Study concepts              |
+| Q3: Skill level?             | Quick Choice                   | 1. Nothing / 2. A little / 3. Some / 4. A lot       |
+| Q4: Strengths/weaknesses?    | Open-Ended                     | Only if level >= intermediate, skip for beginners   |
+| Q5: Language?                | Yes/No (auto-detect)           | Confirm detected language, don't present a list     |
+| Q6: Project/path + stack     | Quick Choice (agent-generated) | Agent proposes 3–4 options with tech stack included |
+| Q7: Deadline? (concept only) | Quick Choice                   | Only if exam selected. 1. No / 2. Yes               |
+| Confirmation                 | Yes/No                         | Summary + defaults listed                           |
 
 ## Session Moment Mapping
 
-| Moment | Type |
-|--------|------|
-| Step 2: Verification questions | Open-Ended |
-| Step 2: After feedback | Flow Control |
-| Step 3: Teach-back ("explain back") | Open-Ended |
-| Step 3: Transition to practice | Flow Control |
-| Step 4: Quiz (concept-based) | Quiz |
-| Step 4: Scenario/compare/teach-back | Open-Ended |
-| Session end: Commit confirmation | Yes/No |
+| Moment                              | Type         |
+| ----------------------------------- | ------------ |
+| Step 2: Verification questions      | Open-Ended   |
+| Step 2: After feedback              | Flow Control |
+| Step 3: Teach-back ("explain back") | Open-Ended   |
+| Step 3: Transition to practice      | Flow Control |
+| Step 4: Quiz (concept-based)        | Quiz         |
+| Step 4: Scenario/compare/teach-back | Open-Ended   |
+| Session end: Commit confirmation    | Yes/No       |
