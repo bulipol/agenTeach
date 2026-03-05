@@ -246,7 +246,37 @@ Here's the plan:
   1. Looks good, let's start
   2. I want to change something
 
-**Only after learner confirms:** proceed to file generation.
+**Only after learner confirms:** announce what will be created, then generate files, then show completion summary.
+
+**Announcement (before generating):**
+```
+Świetnie, zaczynam konfigurację projektu!
+
+Tworzę:
+  • AGENTS.md        — metodologia i zasady sesji
+  • LEARNER.md       — Twój profil, decyzje i roadmapa
+  • CLAUDE.md        — ustawienia dla Claude Code
+  • README.md        — opis projektu
+  • knowledge/       — folder na notatki z nauki
+  • SESSION_LOG.md   — dziennik sesji
+  • CHANGELOG.md     — historia zmian
+
+To może chwilę zająć...
+```
+
+**Completion summary (after all files are generated):**
+```
+--- GOTOWE ---
+Projekt skonfigurowany. Utworzone pliki:
+  ✓ AGENTS.md, LEARNER.md, CLAUDE.md, README.md
+  ✓ knowledge/[first-topic].md
+  ✓ SESSION_LOG.md, CHANGELOG.md
+
+Roadmapa: [N] tematów | Profil: guided | Tryb: [MODE]
+---
+```
+
+After showing this block, begin the first session immediately — do NOT wait for the learner to type `/teach:start` again.
 
 ---
 
