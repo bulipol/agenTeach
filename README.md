@@ -1,6 +1,6 @@
 # agenTeach
 
-A reusable framework for AI-assisted interactive learning. Works with any AI agent (Claude, GPT, Cursor, Copilot) that can read markdown.
+A reusable framework for AI-assisted interactive learning. Works with any AI agent (Claude, Cursor, Codex, OpenCode) that can read markdown.
 
 agenTeach turns AI agents into structured mentors that verify understanding, track learning progress, and adapt to your weak areas across sessions.
 
@@ -8,48 +8,41 @@ agenTeach turns AI agents into structured mentors that verify understanding, tra
 
 ## Quick Start
 
-1. **Use this template** (click "Use this template" on GitHub, or clone directly):
-   ```
-   git clone <your-repo-url> my-learning-project
-   cd my-learning-project
-   ```
+### Option A — CLI (recommended)
 
-2. **Open your AI agent** (Claude, GPT, Cursor, etc.) in this directory.
+```bash
+npx agenteach
+```
 
-3. **Say:** *"Read the README and help me start learning [your topic]."* Or type `/teach-start`.
+Run this in any empty directory. The CLI downloads the framework and installs IDE skills for your tool of choice. Then open your IDE in that folder and type `/teach-start`.
 
-4. The agent reads `.agenteach/onboarding/interview.md`, interviews you, and sets up your project right here.
+> `npx agenteach` downloads from this repo at setup time and installs the `/teach-*` skill files for your IDE. The CLI source is at [bulipol/agenteach-cli](https://github.com/bulipol/agenteach-cli).
 
-That's it. After onboarding, your project directory has your learning files at root level, and the framework stays in `.agenteach/` for reference.
+### Option B — Use this template
+
+Click **"Use this template"** on GitHub, or clone directly:
+
+```bash
+git clone https://github.com/bulipol/agenTeach my-learning-project
+cd my-learning-project
+```
+
+Then open your AI agent in the directory and type `/teach-start`.
 
 ---
 
 ## One Repo Per Topic
 
-Each agenTeach repository is one learning project about one topic. If you want to learn two unrelated subjects (e.g., Machine Learning and AWS), create two separate repos from this template. This keeps context focused and prevents knowledge files from mixing unrelated domains.
-
----
-
-## For AI Agents
-
-**If you are an AI agent reading this file:**
-
-1. Read `.agenteach/AGENTS.md` (methodology), `.agenteach/commands.md` (navigation commands), and `.agenteach/onboarding/interview.md` (onboarding script).
-2. Parse the learner's first message — auto-detect topic, mode, level, and language before asking questions.
-3. Conduct the interview with the learner (2–3 exchanges, not 5–8).
-4. Based on the answers, read the relevant `.agenteach/modes/` file.
-5. Generate the learner's project files at root level: `AGENTS.md`, `LEARNER.md`, `knowledge/`, `SESSION_LOG.md`, etc.
-6. Do NOT modify files inside `.agenteach/` — they are read-only reference material.
-7. After setup, follow the Session Protocol in the generated root-level `AGENTS.md`. Recognize `/teach-*` commands throughout the conversation.
+Each agenTeach repository is one learning project about one topic. If you want to learn two unrelated subjects (e.g., Machine Learning and AWS), create two separate repos. This keeps context focused and prevents knowledge files from mixing unrelated domains.
 
 ---
 
 ## How It Works
 
 1. **Onboarding:** The agent interviews you about your topic, goals, skill level, and preferences.
-2. **Project setup:** The agent creates your learning files (AGENTS.md, knowledge/, roadmap) at root level.
-3. **Sessions:** Each session follows a protocol: verify previous knowledge → teach new concepts → practice → record outcomes.
-4. **Adaptation:** The agent tracks your mistakes and breakthroughs in a learning journal (Dziennik nauki), targeting weak areas in future sessions.
+2. **Project setup:** The agent creates your learning files (`AGENTS.md`, `knowledge/`, roadmap) at root level.
+3. **Sessions:** Each session follows a 5-step protocol: Orient → Verify → Teach → Practice → Record. No skipping.
+4. **Adaptation:** The agent tracks mistakes and breakthroughs in a learning journal (Dziennik nauki), targeting weak areas in future sessions.
 
 ---
 
@@ -66,6 +59,30 @@ Each concept is first explored in `playground/` (isolated script), then integrat
 For topics without a coding project. Examples: AWS certification prep, studying distributed systems.
 
 Uses scenario-based practice, spaced repetition, and deadline management.
+
+---
+
+## Key Concepts
+
+**Session Protocol:** Every session runs 5 steps — Orient (review previous session), Verify (check retention from last time), Teach (new concept), Practice (hands-on), Record (update knowledge files). Steps cannot be skipped. This mirrors spaced repetition research: retrieval before new input improves long-term retention.
+
+**Slash Commands:** Navigation shortcuts the agent recognizes at any point.
+- `/teach-start` — begin or resume a session
+- `/teach-next` — show what's next (always asks for confirmation first)
+- `/teach-status` — full progress dashboard: roadmap, session count, weak areas
+- `/teach-mode` — switch between guided and autonomous profiles
+- `/teach-stop` — end the session and save all progress
+- `/teach-help` — list all commands
+
+**LEARNER.md:** Your learner state lives in a separate file — profile, roadmap with dependency graph, decisions, and weak areas. `AGENTS.md` holds methodology. This split keeps each file small and focused.
+
+**Learner Profiles:** Two modes. **Guided** (default) — step-by-step with confirmation at each stage. **Autonomous** — more content at once, fewer checkpoints. Switch anytime with `/teach-mode`. Both always ask for confirmation on `/teach-next`.
+
+**Active Learning Rules:** The agent ends every explanation with a comprehension check. It doesn't advance until you answer correctly. This enforces active recall rather than passive reading.
+
+**Persistent State:** All learning outcomes persist across sessions in `knowledge/*.md` files. Each file includes a Dziennik nauki (learning journal) that tracks mistakes, struggles, and breakthroughs. The agent reads this at the start of every session so context is never lost.
+
+**Teaching Principles:** Intuition before formalism. Concrete before abstract. Always explain "why", not just "how".
 
 ---
 
@@ -100,24 +117,6 @@ After onboarding, your root will also contain: `AGENTS.md`, `LEARNER.md`, `knowl
 
 ---
 
-## Key Concepts
-
-**Session Protocol:** 5 steps — Orient, Verify, Teach, Practice, Record. No skipping.
-
-**Slash Commands:** Navigation shortcuts the agent recognizes at any point. `/teach-start` begins or resumes a session. `/teach-next` shows what's next (always asks for confirmation). `/teach-status` shows a full progress dashboard. `/teach-mode` switches profiles. `/teach-stop` ends the session. `/teach-help` lists all commands.
-
-**LEARNER.md:** Learner state lives in a separate file — profile, roadmap with dependency graph, decisions, and weak areas. `AGENTS.md` holds methodology. This split keeps each file small and focused.
-
-**Learner Profiles:** Two modes. **Guided** (default) — step-by-step with confirmation at each stage. **Autonomous** — more content at once, fewer checkpoints. Switch anytime with `/teach-mode`. Both always ask for confirmation on `/teach-next`.
-
-**Active Learning Rules:** The agent ends explanations with comprehension checks. It doesn't continue until you answer correctly.
-
-**Dziennik nauki (Learning Journal):** Each knowledge file includes a learning journal that tracks your mistakes, struggles, and breakthroughs. The agent reads this before every session. The Polish name "Dziennik nauki" is used as a structural term throughout the framework.
-
-**Teaching Principles:** Intuition before formalism. Concrete before abstract. Always explain "why", not just "how".
-
----
-
 ## Design Philosophy
 
 See [.agenteach/docs/philosophy.md](.agenteach/docs/philosophy.md) for the full rationale.
@@ -131,3 +130,17 @@ Extracted from a real, working educational project. The core insight: structured
 Current framework version: **0.1.0**
 
 When updating agenTeach in an existing project, compare the version comment at the top of `.agenteach/AGENTS.md` with your project's AGENTS.md. If the framework version is newer, review the changelog for migration notes.
+
+---
+
+## For AI Agents
+
+**If you are an AI agent reading this file:**
+
+1. Read `.agenteach/AGENTS.md` (methodology), `.agenteach/commands.md` (navigation commands), and `.agenteach/onboarding/interview.md` (onboarding script).
+2. Parse the learner's first message — auto-detect topic, mode, level, and language before asking questions.
+3. Conduct the interview with the learner (2–3 exchanges, not 5–8).
+4. Based on the answers, read the relevant `.agenteach/modes/` file.
+5. Generate the learner's project files at root level: `AGENTS.md`, `LEARNER.md`, `knowledge/`, `SESSION_LOG.md`, etc.
+6. Do NOT modify files inside `.agenteach/` — they are read-only reference material.
+7. After setup, follow the Session Protocol in the generated root-level `AGENTS.md`. Recognize `/teach-*` commands throughout the conversation.
