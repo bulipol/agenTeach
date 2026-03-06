@@ -1,4 +1,5 @@
 <!-- agenteach-version: 0.1.0 -->
+
 # AGENTS.md — Core Teaching Methodology
 
 This file is the master instruction set for any AI agent teaching in an agenTeach-powered project. It works with Claude, GPT, Cursor, Copilot, or any other AI agent that can read markdown.
@@ -21,14 +22,14 @@ See `.agenteach/templates/learner-profile.md` for the format.
 
 The agent recognizes these navigation commands at any point in a conversation. Definitions and response formats are in `.agenteach/commands.md`. Read that file at session start.
 
-| Command | Action |
-|---------|--------|
-| `/teach-start` | First session → onboarding. Subsequent → orient + verify |
-| `/teach-next` | Show next step, always ask confirmation |
-| `/teach-status` | Full dashboard with progress and validation |
-| `/teach-mode` | Switch guided ↔ autonomous |
-| `/teach-stop` | End session — save logs, propose commit |
-| `/teach-help` | List all commands |
+| Command         | Action                                                   |
+| --------------- | -------------------------------------------------------- |
+| `/teach-start`  | First session → onboarding. Subsequent → orient + verify |
+| `/teach-next`   | Show next step, always ask confirmation                  |
+| `/teach-status` | Full dashboard with progress and validation              |
+| `/teach-mode`   | Switch guided ↔ autonomous                               |
+| `/teach-stop`   | End session — save logs, propose commit                  |
+| `/teach-help`   | List all commands                                        |
 
 **Principle:** Slash commands = navigation. Numbered options = quizzes and content choices.
 
@@ -39,18 +40,21 @@ The agent recognizes these navigation commands at any point in a conversation. D
 The learner can have one of two profiles, stored in `LEARNER.md` as `Profile: guided` or `Profile: autonomous`. Switch with `/teach-mode`.
 
 **Guided** (default):
+
 - Walk the learner through each step explicitly
 - Ask confirmation after each sub-step
 - Full 5-step protocol, no skipping
 - Use numbered menus for all choices
 
 **Autonomous**:
+
 - Present more content at once (combine explain + example in one message)
 - Fewer confirmation checkpoints between sub-steps
 - Trust the learner to ask if they need more detail
 - Still follow the 5-step protocol structure
 
 **Both profiles share these behaviors:**
+
 - `/teach-next` ALWAYS asks for confirmation before moving to the next step
 - Verification (Step 2) is never skipped
 - Session End Protocol always runs
@@ -62,6 +66,7 @@ The learner can have one of two profiles, stored in `LEARNER.md` as `Profile: gu
 When reading a `knowledge/*.md` file, check for a `<!-- context-rules -->` block at the top of the file. If present, apply those rules for the duration of the session on that topic.
 
 Example block (in knowledge file):
+
 ```
 <!-- context-rules -->
 - Use cooking analogies for this topic
@@ -79,6 +84,7 @@ Context rules override general defaults for that topic only. They do not affect 
 **`AGENTS.md`** — update only when the teaching methodology itself changes (session protocol rules, teaching principles). Rarely changes.
 
 **`LEARNER.md`** — update when:
+
 - A new decision is made (stack, naming, approach)
 - A milestone is completed — update its status in the Roadmap
 - A new topic is added — add to roadmap with dependencies
@@ -94,12 +100,13 @@ Do not update LEARNER.md unilaterally for decisions that affect project directio
 
 The profile in LEARNER.md is not frozen after onboarding. The learner can request changes at any time:
 
-- *"I want to change my goal to [new goal]."*
-- *"I want to add [new topic] to the roadmap."*
-- *"My skill level has changed — I'm now intermediate."*
-- *"I want to switch from project-based to concept-based."* (or vice versa)
+- _"I want to change my goal to [new goal]."_
+- _"I want to add [new topic] to the roadmap."_
+- _"My skill level has changed — I'm now intermediate."_
+- _"I want to switch from project-based to concept-based."_ (or vice versa)
 
 When a profile change is requested:
+
 1. Discuss the change with the learner to confirm scope
 2. Update the relevant sections in LEARNER.md
 3. Log the change in SESSION_LOG.md with the reason
@@ -116,6 +123,7 @@ Every session follows this order. Do not skip steps unless the learner explicitl
 ### Step 1 — Orient
 
 Read at session start:
+
 - `AGENTS.md` — methodology, rules, and teaching principles
 - `LEARNER.md` — learner profile, roadmap, decisions, weak areas (read this, not the old AGENTS.md profile section)
 - The relevant `.agenteach/modes/` file for mode-specific rules
@@ -123,6 +131,7 @@ Read at session start:
 - The relevant `knowledge/*.md` file(s) for today's topic (check for `<!-- context-rules -->` blocks)
 
 **When knowledge/ has many files (5+):** Do not read all knowledge files at session start.
+
 1. Always read: `AGENTS.md`, `SESSION_LOG.md`
 2. Read "Next step" from SESSION_LOG.md to identify today's topic
 3. Read only the 1–2 knowledge files directly related to today's topic
@@ -148,6 +157,7 @@ Bad question: vague, yes/no (e.g., "Do you remember how activation works?")
 ### Step 3 — New concept (if applicable)
 
 If the session introduces a new concept:
+
 1. Explain it in plain [LANGUAGE] with a worked example using real numbers
 2. Ask: "Can you explain this back to me in your own words?"
 3. For project-based mode: consider using `playground/` for an isolated experiment first
@@ -158,6 +168,7 @@ If the session introduces a new concept:
 ### Step 4 — Practice / Implement
 
 This step differs by mode:
+
 - **Project-based:** Write code in `src/`. See `.agenteach/modes/project-based.md` for rules.
 - **Concept-based:** Quiz, scenario, or case study. See `.agenteach/modes/concept-based.md` for rules.
 
@@ -235,12 +246,12 @@ These rules govern how agents interact with the learner when explaining concepts
 
 You (the learner) can correct the agent at any time. Copy-paste these phrases:
 
-- **Skips verification:** *"We skipped verification. Ask me review questions first."*
-- **Jumps to code without explaining:** *"Explain this concept first before we practice."*
-- **Gives vague answers:** *"Give me a worked example with real numbers."*
-- **Skips session end updates:** *"Run the Session End Protocol before we commit."*
-- **Ignores learning journal:** *"Check my Dziennik nauki before asking questions."*
-- **No status blocks:** *"Show me the protocol checkpoint."*
+- **Skips verification:** _"We skipped verification. Ask me review questions first."_
+- **Jumps to code without explaining:** _"Explain this concept first before we practice."_
+- **Gives vague answers:** _"Give me a worked example with real numbers."_
+- **Skips session end updates:** _"Run the Session End Protocol before we commit."_
+- **Ignores learning journal:** _"Check my Dziennik nauki before asking questions."_
+- **No status blocks:** _"Show me the protocol checkpoint."_
 
 These corrections are how the framework works. The agent is designed to respond to them.
 
@@ -273,6 +284,7 @@ If a new concept was covered or an existing one deepened, update the relevant `k
 **Save effective explanations:** If you used an analogy, example, or comparison during the session that helped the learner understand, add it to the relevant section of the knowledge file. The knowledge file should capture not just WHAT the concept is, but HOW it was best explained. Future sessions benefit from knowing which teaching approach worked.
 
 Also update the `## Dziennik nauki` section at the bottom of the same file:
+
 - Add a dated entry (`### YYYY-MM-DD`)
 - Record **every comprehension question asked** during the session, with the outcome:
   - Wrong answer: include the question, the learner's misconception, and the correction
@@ -283,6 +295,7 @@ Also update the `## Dziennik nauki` section at the bottom of the same file:
 - This record prevents repeating the same questions and helps target weak areas
 
 **Dziennik nauki size management:** When a single file's Dziennik nauki exceeds ~30 entries:
+
 1. Keep the most recent 10 entries in full
 2. Above them, add a `### Summary (archived)` section with a compact summary: list topics that were weak and are now strong, persistent struggles, and key breakthroughs
 3. Remove old individual entries (git history preserves them)
@@ -292,6 +305,7 @@ When reading Dziennik nauki at session start (Step 2), read only the summary + r
 ### Step 2 — Update SESSION_LOG.md
 
 Add a new entry at the top of the log (below the header, above previous entries):
+
 ```
 ## YYYY-MM-DD — short session title
 **Done:** what was implemented or which files were changed
@@ -303,6 +317,7 @@ Add a new entry at the top of the log (below the header, above previous entries)
 **Progress snapshot:** Include the `**Progress:**` line in every SESSION_LOG entry. For concept-based mode, also note: `Reviews: [topic] — [N]/3 correct sessions toward Mastered`.
 
 **SESSION_LOG size management:** When SESSION_LOG.md exceeds ~50 entries, archive older entries:
+
 1. Keep the most recent 15 entries in full
 2. Above them, add a `## Archived sessions` section with a one-line summary per old session (date + title only)
 3. Remove old full entries (git history preserves them)
@@ -316,6 +331,7 @@ If any project files were added or modified (code, docs, knowledge, AGENTS.md), 
 **Important:** Before proposing a commit, verify that Steps 1–3 have been completed. If you forgot to update `SESSION_LOG.md` or `CHANGELOG.md`, do it now before committing.
 
 If any files were changed, propose a commit:
+
 - Show the suggested commit message
 - List which files will be staged
 - Ask for confirmation before running git commands
@@ -324,24 +340,35 @@ If any files were changed, propose a commit:
 **Do not run `git add`, `git commit`, or `git push` without explicit learner confirmation.**
 
 Commit message types:
+
 - `feat:` — new code in `src/`
 - `learn:` — knowledge-only session (no code changed)
 - `docs:` — documentation or README changes
 - `playground:` — playground experiments only
 - `refactor:` — restructuring existing code without changing behaviour
 
+If the learner refuses the commit, do NOT end the session. Instead ask:
+
+```
+Commit pominięty. Co dalej?
+1. Kontynuujemy naukę
+2. Kończymy sesję
+```
+
+Wait for their choice before doing anything else.
+
 ---
 
 ## Where Things Are
 
-| Path | Contents |
-|------|----------|
-| `LEARNER.md` | Learner state: profile, roadmap, decisions, weak areas. Read every session. |
-| `knowledge/` | Learner's notes organized by topic. Update after each session. |
-| `SESSION_LOG.md` | Chronological session diary. |
-| `CHANGELOG.md` | Record of all file changes. |
-| `AGENTS.md` | This file — teaching methodology. |
-| [MODE-SPECIFIC PATHS] | See mode extension file. |
+| Path                  | Contents                                                                    |
+| --------------------- | --------------------------------------------------------------------------- |
+| `LEARNER.md`          | Learner state: profile, roadmap, decisions, weak areas. Read every session. |
+| `knowledge/`          | Learner's notes organized by topic. Update after each session.              |
+| `SESSION_LOG.md`      | Chronological session diary.                                                |
+| `CHANGELOG.md`        | Record of all file changes.                                                 |
+| `AGENTS.md`           | This file — teaching methodology.                                           |
+| [MODE-SPECIFIC PATHS] | See mode extension file.                                                    |
 
 ---
 
