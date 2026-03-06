@@ -8,7 +8,7 @@ These commands work in any conversation with the AI agent. The agent reads this 
 
 ---
 
-## `/teach:start`
+## `/teach-start`
 
 **First session** (LEARNER.md does not exist at root): Run full onboarding (`.agenteach/onboarding/interview.md`). Generate LEARNER.md and other project files after confirmation.
 
@@ -18,7 +18,7 @@ These commands work in any conversation with the AI agent. The agent reads this 
 
 ---
 
-## `/teach:next`
+## `/teach-next`
 
 Show what comes next and ask for confirmation before proceeding. This flow is identical regardless of profile (guided or autonomous) — always ask.
 
@@ -48,7 +48,7 @@ Only propose topics whose prerequisites are marked DONE in LEARNER.md. Always wa
 
 ---
 
-## `/teach:status`
+## `/teach-status`
 
 Show the full dashboard with progress and validation. **Output it as a code block** (wrap in ` ``` `) so the formatting renders correctly — same as SESSION START/END blocks.
 
@@ -77,7 +77,7 @@ Walidacja:
 
 ---
 
-## `/teach:mode`
+## `/teach-mode`
 
 Switch between guided and autonomous profile. Show current profile first:
 
@@ -96,7 +96,7 @@ After switching, update `Tryb:` in LEARNER.md.
 
 ---
 
-## `/teach:stop`
+## `/teach-stop`
 
 End the current session. Run the full Session End Protocol (defined in AGENTS.md):
 
@@ -108,16 +108,16 @@ End the current session. Run the full Session End Protocol (defined in AGENTS.md
 
 ---
 
-## `/teach:help`
+## `/teach-help`
 
 List all available commands:
 
 ```
 Dostępne komendy:
-  /teach:start  — zacznij sesję (onboarding lub kontynuacja)
-  /teach:next   — co dalej? (zawsze pyta o potwierdzenie)
-  /teach:status — dashboard (postęp, słabe strony, walidacja)
-  /teach:mode   — zmień profil (guided / autonomous)
-  /teach:stop   — zakończ sesję (zapisz logi, zaproponuj commit)
-  /teach:help   — ta lista
+  /teach-start  — zacznij sesję (onboarding lub kontynuacja)
+  /teach-next   — co dalej? (zawsze pyta o potwierdzenie)
+  /teach-status — dashboard (postęp, słabe strony, walidacja)
+  /teach-mode   — zmień profil (guided / autonomous)
+  /teach-stop   — zakończ sesję (zapisz logi, zaproponuj commit)
+  /teach-help   — ta lista
 ```

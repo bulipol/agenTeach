@@ -16,7 +16,7 @@ agenTeach turns AI agents into structured mentors that verify understanding, tra
 
 2. **Open your AI agent** (Claude, GPT, Cursor, etc.) in this directory.
 
-3. **Say:** *"Read the README and help me start learning [your topic]."* Or type `/teach:start`.
+3. **Say:** *"Read the README and help me start learning [your topic]."* Or type `/teach-start`.
 
 4. The agent reads `.agenteach/onboarding/interview.md`, interviews you, and sets up your project right here.
 
@@ -40,7 +40,7 @@ Each agenTeach repository is one learning project about one topic. If you want t
 4. Based on the answers, read the relevant `.agenteach/modes/` file.
 5. Generate the learner's project files at root level: `AGENTS.md`, `LEARNER.md`, `knowledge/`, `SESSION_LOG.md`, etc.
 6. Do NOT modify files inside `.agenteach/` — they are read-only reference material.
-7. After setup, follow the Session Protocol in the generated root-level `AGENTS.md`. Recognize `/teach:*` commands throughout the conversation.
+7. After setup, follow the Session Protocol in the generated root-level `AGENTS.md`. Recognize `/teach-*` commands throughout the conversation.
 
 ---
 
@@ -79,7 +79,7 @@ agenTeach/
 └── .agenteach/               # Framework files (read-only reference)
     ├── AGENTS.md             # Core teaching methodology
     ├── CLAUDE.md             # Claude Code-specific extensions
-    ├── commands.md           # /teach:* slash command definitions
+    ├── commands.md           # /teach-* slash command definitions
     ├── modes/
     │   ├── project-based.md  # Rules for learn-by-building mode
     │   └── concept-based.md  # Rules for concept/cert learning mode
@@ -104,11 +104,11 @@ After onboarding, your root will also contain: `AGENTS.md`, `LEARNER.md`, `knowl
 
 **Session Protocol:** 5 steps — Orient, Verify, Teach, Practice, Record. No skipping.
 
-**Slash Commands:** Navigation shortcuts the agent recognizes at any point. `/teach:start` begins or resumes a session. `/teach:next` shows what's next (always asks for confirmation). `/teach:status` shows a full progress dashboard. `/teach:mode` switches profiles. `/teach:stop` ends the session. `/teach:help` lists all commands.
+**Slash Commands:** Navigation shortcuts the agent recognizes at any point. `/teach-start` begins or resumes a session. `/teach-next` shows what's next (always asks for confirmation). `/teach-status` shows a full progress dashboard. `/teach-mode` switches profiles. `/teach-stop` ends the session. `/teach-help` lists all commands.
 
 **LEARNER.md:** Learner state lives in a separate file — profile, roadmap with dependency graph, decisions, and weak areas. `AGENTS.md` holds methodology. This split keeps each file small and focused.
 
-**Learner Profiles:** Two modes. **Guided** (default) — step-by-step with confirmation at each stage. **Autonomous** — more content at once, fewer checkpoints. Switch anytime with `/teach:mode`. Both always ask for confirmation on `/teach:next`.
+**Learner Profiles:** Two modes. **Guided** (default) — step-by-step with confirmation at each stage. **Autonomous** — more content at once, fewer checkpoints. Switch anytime with `/teach-mode`. Both always ask for confirmation on `/teach-next`.
 
 **Active Learning Rules:** The agent ends explanations with comprehension checks. It doesn't continue until you answer correctly.
 

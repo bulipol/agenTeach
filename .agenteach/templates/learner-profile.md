@@ -14,7 +14,7 @@
 - **Language:** [LANGUAGE]
 - **Code language:** [CODE_LANGUAGE]
 - **Timeline:** [TIMELINE]
-- **Tryb:** guided  <!-- guided | autonomous — zmień przez /teach:mode -->
+- **Tryb:** guided  <!-- guided | autonomous — zmień przez /teach-mode -->
 
 ---
 
@@ -43,7 +43,7 @@ Topics with dependency graph. Only propose topics whose requirements are marked 
 
 **Status values:** DONE | IN PROGRESS | NOT STARTED | BLOCKED
 
-**Navigation rule:** When a topic is marked DONE, check which new topics are now unblocked (all their requirements are DONE) and surface them with `/teach:next`.
+**Navigation rule:** When a topic is marked DONE, check which new topics are now unblocked (all their requirements are DONE) and surface them with `/teach-next`.
 
 ---
 

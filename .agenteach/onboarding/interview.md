@@ -17,7 +17,7 @@ Before asking any questions, parse the learner's first message and extract:
 
 **For each field that was NOT detected:** ask the corresponding Phase 1 question normally — one question at a time, never two in one message.
 
-**Language rule:** Use the learner's language throughout the entire onboarding. Never switch languages mid-sentence. If the first message contains no language signal (e.g., `/teach:start`, a product name, or a single word), **default to Polish**. Switch to another language only if the learner writes full sentences in it.
+**Language rule:** Use the learner's language throughout the entire onboarding. Never switch languages mid-sentence. If the first message contains no language signal (e.g., `/teach-start`, a product name, or a single word), **default to Polish**. Switch to another language only if the learner writes full sentences in it.
 
 **Goal:** Reduce onboarding from 5–8 exchanges to 2–3 by skipping questions already answered in the learner's messages.
 
@@ -63,7 +63,7 @@ Postęp i słabe strony śledzę między sesjami — nie zaczynamy od zera za ka
 
 ## Tryb nauki
 
-Możesz zmienić w każdej chwili przez `/teach:mode`:
+Możesz zmienić w każdej chwili przez `/teach-mode`:
 
 - **Guided** *(domyślny)* — prowadzę Cię krok po kroku, potwierdzenia po każdym etapie
 - **Autonomous** — więcej treści na raz, mniej micro-interakcji, sam/a ustawiasz tempo
@@ -74,12 +74,12 @@ Możesz zmienić w każdej chwili przez `/teach:mode`:
 
 | Komenda | Działanie |
 |---------|-----------|
-| `/teach:start` | zacznij lub wróć do sesji |
-| `/teach:next` | co dalej? (zawsze pyta o potwierdzenie) |
-| `/teach:status` | dashboard: postęp, roadmapa, słabe strony |
-| `/teach:mode` | zmień tryb nauki (guided / autonomous) |
-| `/teach:stop` | zakończ sesję i zapisz notatki |
-| `/teach:help` | ta lista komend |
+| `/teach-start` | zacznij lub wróć do sesji |
+| `/teach-next` | co dalej? (zawsze pyta o potwierdzenie) |
+| `/teach-status` | dashboard: postęp, roadmapa, słabe strony |
+| `/teach-mode` | zmień tryb nauki (guided / autonomous) |
+| `/teach-stop` | zakończ sesję i zapisz notatki |
+| `/teach-help` | ta lista komend |
 
 ---
 
@@ -341,7 +341,7 @@ Roadmapa: [N] tematów | Profil: guided | Tryb: [MODE]
 ---
 ```
 
-After showing this block, begin the first session immediately — do NOT wait for the learner to type `/teach:start` again.
+After showing this block, begin the first session immediately — do NOT wait for the learner to type `/teach-start` again.
 
 ---
 

@@ -23,12 +23,12 @@ The agent recognizes these navigation commands at any point in a conversation. D
 
 | Command | Action |
 |---------|--------|
-| `/teach:start` | First session → onboarding. Subsequent → orient + verify |
-| `/teach:next` | Show next step, always ask confirmation |
-| `/teach:status` | Full dashboard with progress and validation |
-| `/teach:mode` | Switch guided ↔ autonomous |
-| `/teach:stop` | End session — save logs, propose commit |
-| `/teach:help` | List all commands |
+| `/teach-start` | First session → onboarding. Subsequent → orient + verify |
+| `/teach-next` | Show next step, always ask confirmation |
+| `/teach-status` | Full dashboard with progress and validation |
+| `/teach-mode` | Switch guided ↔ autonomous |
+| `/teach-stop` | End session — save logs, propose commit |
+| `/teach-help` | List all commands |
 
 **Principle:** Slash commands = navigation. Numbered options = quizzes and content choices.
 
@@ -36,7 +36,7 @@ The agent recognizes these navigation commands at any point in a conversation. D
 
 ## Learner Profiles
 
-The learner can have one of two profiles, stored in `LEARNER.md` as `Profile: guided` or `Profile: autonomous`. Switch with `/teach:mode`.
+The learner can have one of two profiles, stored in `LEARNER.md` as `Profile: guided` or `Profile: autonomous`. Switch with `/teach-mode`.
 
 **Guided** (default):
 - Walk the learner through each step explicitly
@@ -51,7 +51,7 @@ The learner can have one of two profiles, stored in `LEARNER.md` as `Profile: gu
 - Still follow the 5-step protocol structure
 
 **Both profiles share these behaviors:**
-- `/teach:next` ALWAYS asks for confirmation before moving to the next step
+- `/teach-next` ALWAYS asks for confirmation before moving to the next step
 - Verification (Step 2) is never skipped
 - Session End Protocol always runs
 
@@ -84,7 +84,7 @@ Context rules override general defaults for that topic only. They do not affect 
 - A new topic is added — add to roadmap with dependencies
 - A new `knowledge/` file is created — add to the Knowledge Files table
 - A weak area is identified — add to Weak Areas section
-- Profile changes (`/teach:mode`)
+- Profile changes (`/teach-mode`)
 
 When updating LEARNER.md, also add a brief note to `SESSION_LOG.md`.
 
@@ -352,7 +352,7 @@ The roadmap lives in `LEARNER.md` (see `## Roadmap` section there). It uses a de
 - **Project-based:** stages (Track A) + topics (Track B). See `.agenteach/modes/project-based.md`.
 - **Concept-based:** topic list with weights and review dates. See `.agenteach/modes/concept-based.md`.
 
-**Navigation rule:** When proposing the next topic (via `/teach:next` or at natural transitions), only suggest topics whose requirements are all marked DONE in LEARNER.md.
+**Navigation rule:** When proposing the next topic (via `/teach-next` or at natural transitions), only suggest topics whose requirements are all marked DONE in LEARNER.md.
 
 ### Roadmap Completion
 

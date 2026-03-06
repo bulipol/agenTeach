@@ -39,9 +39,9 @@ When a new concept is introduced, use `playground/` for isolated experiments fir
 
 ---
 
-## Dashboard (`/teach:status`)
+## Dashboard (`/teach-status`)
 
-When the learner runs `/teach:status`, show this format for project-based mode. **Output as a code block** (wrap in ` ``` `) so formatting renders correctly.
+When the learner runs `/teach-status`, show this format for project-based mode. **Output as a code block** (wrap in ` ``` `) so formatting renders correctly.
 
 ```
 --- DASHBOARD ---
